@@ -8,6 +8,12 @@ Kubernetes / GitOps experimentation
 
 ## Instalation
 
+### Configure application
+1. Create application namespace
+```
+$ kubectl create namespace application
+```
+
 ### Install argo-cd
 
 1. Install
@@ -35,5 +41,22 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 
 4. Access the UI via browser at `localhost:8080` and login
 
+5. Connect to the repository
+  - Side menu, 'wheel' icon
+  - Repositories
+  - Connect repo using HTTPS
+  - Fill the fields:
+    - Type: git
+    - Repostory URL: https://github.com/irmao/kubetest.git
+    - Username: [username]
+    - Password: [password]
 
-
+5. Click `New App` and fill the application info
+  - Application Name: kubetest
+  - Project: default
+  - Sync Policy: Automatic
+  - Prune Resources: checked
+  - Repository URL: https://github.com/irmao/kubetest.git
+  - Path: application
+  - Cluster URL: cluster name ('in-cluster', if using minikube)
+  - Namespace: application
